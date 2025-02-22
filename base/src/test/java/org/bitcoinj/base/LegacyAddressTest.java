@@ -17,6 +17,7 @@
 
 package org.bitcoinj.base;
 
+import io.github.pixee.security.BoundedLineReader;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.bitcoinj.base.exceptions.AddressFormatException;
@@ -214,7 +215,7 @@ public class LegacyAddressTest {
         BufferedReader dataSetReader = new BufferedReader(
                 new InputStreamReader(getClass().getResourceAsStream("LegacyAddressTestDataset.txt")));
         String line;
-        while ((line = dataSetReader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(dataSetReader, 5_000_000)) != null) {
             String addr[] = line.split(",");
             LegacyAddress first = LegacyAddress.fromBase58(addr[0], MAINNET);
             LegacyAddress second = LegacyAddress.fromBase58(addr[1], MAINNET);

@@ -18,6 +18,7 @@
 package org.bitcoinj.wallet;
 
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 import org.bitcoinj.base.Network;
 import org.bitcoinj.base.ScriptType;
 import org.bitcoinj.base.Address;
@@ -768,7 +769,7 @@ public class DeterministicKeyChainTest {
         try {
             BufferedReader reader = new BufferedReader(new StringReader(key.toString()));
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 if (!line.startsWith("#"))
                     sb.append(line).append('\n');
             }

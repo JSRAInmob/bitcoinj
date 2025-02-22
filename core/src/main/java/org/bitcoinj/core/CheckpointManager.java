@@ -20,6 +20,7 @@ import com.google.common.hash.HashCode;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
+import io.github.pixee.security.BoundedLineReader;
 import org.bitcoinj.base.Sha256Hash;
 import org.bitcoinj.base.internal.TimeUtils;
 import org.bitcoinj.store.BlockStore;
@@ -119,18 +120,18 @@ public class CheckpointManager {
         Hasher hasher = Hashing.sha256().newHasher();
         try (BufferedReader reader =
                      new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.US_ASCII))) {
-            String magic = reader.readLine();
+            String magic = BoundedLineReader.readLine(reader, 5_000_000);
             if (!TEXTUAL_MAGIC.equals(magic))
                 throw new IOException("unexpected magic: " + magic);
-            int numSigs = Integer.parseInt(reader.readLine());
+            int numSigs = Integer.parseInt(BoundedLineReader.readLine(reader, 5_000_000));
             for (int i = 0; i < numSigs; i++)
-                reader.readLine(); // Skip sigs for now.
-            int numCheckpoints = Integer.parseInt(reader.readLine());
+                BoundedLineReader.readLine(reader, 5_000_000); // Skip sigs for now.
+            int numCheckpoints = Integer.parseInt(BoundedLineReader.readLine(reader, 5_000_000));
             checkState(numCheckpoints > 0);
             // Hash numCheckpoints in a way compatible to the binary format.
             hasher.putBytes(ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN).putInt(numCheckpoints).array());
             for (int i = 0; i < numCheckpoints; i++) {
-                byte[] bytes = BASE64.decode(reader.readLine());
+                byte[] bytes = BASE64.decode(BoundedLineReader.readLine(reader, 5_000_000));
                 hasher.putBytes(bytes);
                 ByteBuffer buffer = ByteBuffer.wrap(bytes);
                 StoredBlock block;
