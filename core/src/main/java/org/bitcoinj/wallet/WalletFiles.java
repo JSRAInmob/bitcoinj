@@ -17,6 +17,7 @@
 
 package org.bitcoinj.wallet;
 
+import java.nio.file.Files;
 import org.bitcoinj.base.internal.Stopwatch;
 import org.bitcoinj.base.internal.TimeUtils;
 import org.bitcoinj.utils.ContextPropagatingThreadFactory;
@@ -136,7 +137,7 @@ public class WalletFiles {
         if (!directory.exists()) {
             throw new FileNotFoundException(directory.getPath() + " (wallet directory not found)");
         }
-        File temp = File.createTempFile("wallet", null, directory);
+        File temp = Files.createTempFile(directory.toPath(), "wallet", null).toFile();
         final Listener listener = vListener;
         if (listener != null)
             listener.onBeforeAutoSave(temp);

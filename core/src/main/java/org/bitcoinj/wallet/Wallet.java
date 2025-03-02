@@ -21,6 +21,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.math.IntMath;
 import com.google.protobuf.ByteString;
+import java.nio.file.Files;
 import net.jcip.annotations.GuardedBy;
 import org.bitcoinj.base.BitcoinNetwork;
 import org.bitcoinj.base.Network;
@@ -1597,7 +1598,7 @@ public class Wallet extends BaseTaggableObject
         if (!directory.exists()) {
             throw new FileNotFoundException(directory.getPath() + " (wallet directory not found)");
         }
-        File temp = File.createTempFile("wallet", null, directory);
+        File temp = Files.createTempFile(directory.toPath(), "wallet", null).toFile();
         saveToFile(temp, f);
     }
 
