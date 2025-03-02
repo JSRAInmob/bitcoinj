@@ -18,6 +18,7 @@
 package org.bitcoinj.wallet;
 
 import com.google.common.collect.Lists;
+import java.nio.file.Files;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.BitcoinNetwork;
@@ -1704,7 +1705,7 @@ public class WalletTest extends TestWithWallet {
     @Test
     public void autosaveImmediate() throws Exception {
         // Test that the wallet will save itself automatically when it changes.
-        File f = File.createTempFile("bitcoinj-unit-test", null);
+        File f = Files.createTempFile("bitcoinj-unit-test", null).toFile();
         Sha256Hash hash1 = Sha256Hash.of(f);
         // Start with zero delay and ensure the wallet file changes after adding a key.
         wallet.autosaveToFile(f, Duration.ZERO, null);
@@ -1726,7 +1727,7 @@ public class WalletTest extends TestWithWallet {
         // an auto-save cycle of 1 second.
         final File[] results = new File[2];
         final CountDownLatch latch = new CountDownLatch(3);
-        File f = File.createTempFile("bitcoinj-unit-test", null);
+        File f = Files.createTempFile("bitcoinj-unit-test", null).toFile();
         Sha256Hash hash1 = Sha256Hash.of(f);
         wallet.autosaveToFile(f, Duration.ofSeconds(1),
                 new WalletFiles.Listener() {

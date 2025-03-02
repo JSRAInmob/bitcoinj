@@ -17,6 +17,7 @@
 
 package org.bitcoinj.store;
 
+import java.nio.file.Files;
 import org.bitcoinj.base.BitcoinNetwork;
 import org.bitcoinj.base.ScriptType;
 import org.bitcoinj.base.Address;
@@ -61,7 +62,7 @@ public class SPVBlockStoreTest {
     @Before
     public void setup() throws Exception {
         Context.propagate(new Context());
-        blockStoreFile = File.createTempFile("spvblockstore", null);
+        blockStoreFile = Files.createTempFile("spvblockstore", null).toFile();
         blockStoreFile.delete();
         blockStoreFile.deleteOnExit();
     }
