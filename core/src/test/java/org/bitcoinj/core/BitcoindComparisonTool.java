@@ -18,6 +18,7 @@
 package org.bitcoinj.core;
 
 import com.google.common.collect.Iterables;
+import java.nio.file.Files;
 import org.bitcoinj.base.Sha256Hash;
 import org.bitcoinj.net.NioClient;
 import org.bitcoinj.params.RegTestParams;
@@ -72,7 +73,7 @@ public class BitcoindComparisonTool {
         System.out.println("USAGE: bitcoinjBlockStoreLocation runExpensiveTests(1/0) [port=18444]");
         boolean runExpensiveTests = args.length > 1 && Integer.parseInt(args[1]) == 1;
 
-        File blockFile = File.createTempFile("testBlocks", ".dat");
+        File blockFile = Files.createTempFile("testBlocks", ".dat").toFile();
         blockFile.deleteOnExit();
 
         FullBlockTestGenerator generator = new FullBlockTestGenerator(PARAMS);
