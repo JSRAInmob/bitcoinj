@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import org.bitcoinj.base.Coin;
 import org.bitcoinj.base.Sha256Hash;
 import org.bitcoinj.base.VarInt;
@@ -1775,7 +1776,7 @@ public class FullBlockTestGenerator {
         Transaction t = new Transaction();
         if (prevOut != null) {
             // Entirely invalid scriptPubKey to ensure we aren't pre-verifying too much
-            t.addOutput(new TransactionOutput(t, ZERO, new byte[] {(byte)(new Random().nextInt() & 0xff), uniquenessCounter++}));
+            t.addOutput(new TransactionOutput(t, ZERO, new byte[] {(byte)(new SecureRandom().nextInt() & 0xff), uniquenessCounter++}));
             // Spendable output
             t.addOutput(new TransactionOutput(t, SATOSHI, new byte[] {OP_1}));
             addOnlyInputToTransaction(t, prevOut);

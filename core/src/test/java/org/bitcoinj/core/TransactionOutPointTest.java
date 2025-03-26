@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.Sha256Hash;
@@ -46,7 +47,7 @@ public class TransactionOutPointTest {
     }
 
     private Iterator<TransactionOutPoint> randomOutPoints() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         return Stream.generate(() -> {
             byte[] randomBytes = new byte[Sha256Hash.LENGTH];
             random.nextBytes(randomBytes);

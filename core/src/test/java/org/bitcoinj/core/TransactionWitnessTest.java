@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.internal.ByteUtils;
@@ -83,7 +84,7 @@ public class TransactionWitnessTest {
     }
 
     private Iterator<TransactionWitness> randomWitness() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         return Stream.generate(() -> {
             return TransactionWitness.of(Stream.generate(() -> {
                 byte[] randomBytes = new byte[random.nextInt(50)];

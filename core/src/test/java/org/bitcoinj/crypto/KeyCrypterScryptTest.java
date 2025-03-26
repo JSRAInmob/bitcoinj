@@ -17,6 +17,7 @@
 
 package org.bitcoinj.crypto;
 
+import java.security.SecureRandom;
 import org.bitcoinj.base.internal.ByteUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -130,7 +131,7 @@ public class KeyCrypterScryptTest {
     @Test
     public void testEncryptDecryptBytes2() {
         // Encrypt random bytes of various lengths up to length 50.
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         for (int i = 0; i < 50; i++) {
             byte[] plainBytes = new byte[i];

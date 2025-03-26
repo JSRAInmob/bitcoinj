@@ -16,6 +16,7 @@
 
 package org.bitcoinj.net;
 
+import java.security.SecureRandom;
 import org.bitcoinj.base.internal.TimeUtils;
 import org.bitcoinj.core.BloomFilter;
 import org.bitcoinj.core.PeerFilterProvider;
@@ -44,7 +45,7 @@ import java.util.Random;
  */
 public class FilterMerger {
     // We use a constant tweak to avoid giving up privacy when we regenerate our filter with new keys
-    private final int bloomFilterTweak = new Random().nextInt();
+    private final int bloomFilterTweak = new SecureRandom().nextInt();
 
     // TODO: Make final after deprecated setBloomFilterFPRate() method is removed
     private volatile double vBloomFilterFPRate;

@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import org.bitcoinj.base.internal.ByteUtils;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class Ping extends BaseMessage {
      * @return ping message
      */
     public static Ping random() {
-        long nonce = new Random().nextLong();
+        long nonce = new SecureRandom().nextLong();
         return new Ping(nonce);
     }
 

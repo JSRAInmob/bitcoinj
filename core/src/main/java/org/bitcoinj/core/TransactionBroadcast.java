@@ -17,6 +17,7 @@
 package org.bitcoinj.core;
 
 import com.google.common.annotations.VisibleForTesting;
+import java.security.SecureRandom;
 import org.bitcoinj.base.internal.FutureUtils;
 import org.bitcoinj.base.internal.StreamUtils;
 import org.bitcoinj.base.internal.InternalUtils;
@@ -63,7 +64,7 @@ public class TransactionBroadcast {
 
     /** Used for shuffling the peers before broadcast: unit tests can replace this to make themselves deterministic. */
     @VisibleForTesting
-    public static Random random = new Random();
+    public static Random random = new SecureRandom();
     
     // Tracks which nodes sent us a reject message about this broadcast, if any. Useful for debugging.
     private final Map<Peer, RejectMessage> rejects = Collections.synchronizedMap(new HashMap<Peer, RejectMessage>());

@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.core.Services;
@@ -71,7 +72,7 @@ public class ServicesTest {
     }
 
     private Iterator<Long> randomLongs() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         return LongStream.generate(() -> random.nextLong()).limit(10).iterator();
     }
 }

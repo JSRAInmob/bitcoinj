@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.Address;
@@ -135,7 +136,7 @@ public class TransactionOutputTest extends TestWithWallet {
     }
 
     private Iterator<TransactionOutput> randomOutputs() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         Transaction parent = new Transaction();
         return Stream.generate(() -> {
             byte[] randomBytes = new byte[100];

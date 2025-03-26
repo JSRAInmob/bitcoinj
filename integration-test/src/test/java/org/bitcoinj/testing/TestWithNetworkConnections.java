@@ -17,6 +17,7 @@
 
 package org.bitcoinj.testing;
 
+import java.security.SecureRandom;
 import org.bitcoinj.base.Address;
 import org.bitcoinj.base.Coin;
 import org.bitcoinj.base.ScriptType;
@@ -68,7 +69,7 @@ import static org.bitcoinj.base.internal.Preconditions.checkState;
  * Utility class that makes it easy to work with mock NetworkConnections.
  */
 public class TestWithNetworkConnections {
-    protected static final int TCP_PORT_BASE = 10000 + new Random().nextInt(40000);
+    protected static final int TCP_PORT_BASE = 10000 + new SecureRandom().nextInt(40000);
     public static final int PEER_SERVERS = 5;
 
     protected static final NetworkParameters UNITTEST = UnitTestParams.get();
