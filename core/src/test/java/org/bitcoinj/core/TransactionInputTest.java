@@ -17,6 +17,7 @@
 package org.bitcoinj.core;
 
 import com.google.common.collect.Lists;
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.Address;
@@ -136,7 +137,7 @@ public class TransactionInputTest {
     }
 
     private Iterator<TransactionInput> randomInputs() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         Transaction parent = new Transaction();
         return Stream.generate(() -> {
             byte[] randomBytes = new byte[100];

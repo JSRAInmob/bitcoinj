@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.Sha256Hash;
@@ -48,7 +49,7 @@ public class PartialMerkleTreeTest {
     }
 
     private Iterator<PartialMerkleTree> randomPartialMerkleTrees() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         return Stream.generate(() -> {
             byte[] randomBits = new byte[random.nextInt(20)];
             random.nextBytes(randomBits);

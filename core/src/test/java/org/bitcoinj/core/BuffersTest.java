@@ -16,6 +16,7 @@
 
 package org.bitcoinj.core;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.bitcoinj.base.VarInt;
@@ -48,7 +49,7 @@ public class BuffersTest {
     }
 
     private Iterator<byte[]> randomBytes() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         return Stream.generate(() -> {
             int length = random.nextInt(10);
             byte[] bytes = new byte[length];

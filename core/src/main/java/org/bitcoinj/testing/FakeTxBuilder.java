@@ -18,6 +18,7 @@
 package org.bitcoinj.testing;
 
 import com.google.common.annotations.VisibleForTesting;
+import java.security.SecureRandom;
 import org.bitcoinj.base.Network;
 import org.bitcoinj.base.ScriptType;
 import org.bitcoinj.base.Address;
@@ -115,7 +116,7 @@ public class FakeTxBuilder {
         t.addOutput(outputToMe);
 
         // Make a random split in the output value so we get a distinct hash when we call this multiple times with same args
-        long split = new Random().nextLong();
+        long split = new SecureRandom().nextLong();
         if (split < 0) { split *= -1; }
         if (split == 0) { split = 15; }
         while (split > value.getValue()) {

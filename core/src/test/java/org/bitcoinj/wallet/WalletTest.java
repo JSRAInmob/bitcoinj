@@ -2067,7 +2067,7 @@ public class WalletTest extends TestWithWallet {
         sendMoneyToWallet(AbstractBlockChain.NewBlockType.BEST_CHAIN, valueOf(100, 0));
         Transaction tx = new Transaction();
         byte[] bits = new byte[20];
-        new Random().nextBytes(bits);
+        new SecureRandom().nextBytes(bits);
         Coin v = CENT;
         // 3100 outputs to a random address.
         for (int i = 0; i < 3100; i++) {
@@ -2798,7 +2798,7 @@ public class WalletTest extends TestWithWallet {
     public void testEmptyRandomWallet() throws Exception {
         // Add a random set of outputs
         StoredBlock block = new StoredBlock(makeSolvedTestBlock(blockStore, OTHER_ADDRESS), BigInteger.ONE, 1);
-        Random rng = new Random();
+        Random rng = new SecureRandom();
         for (int i = 0; i < rng.nextInt(100) + 1; i++) {
             Transaction tx = createFakeTx(TESTNET, Coin.valueOf(rng.nextInt((int) COIN.value)), myAddress);
             wallet.receiveFromBlock(tx, block, AbstractBlockChain.NewBlockType.BEST_CHAIN, i);

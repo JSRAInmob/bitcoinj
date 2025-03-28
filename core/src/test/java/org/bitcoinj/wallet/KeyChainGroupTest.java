@@ -17,6 +17,7 @@
 
 package org.bitcoinj.wallet;
 
+import java.security.SecureRandom;
 import org.bitcoinj.base.Address;
 import org.bitcoinj.base.BitcoinNetwork;
 import org.bitcoinj.base.internal.TimeUtils;
@@ -269,7 +270,7 @@ public class KeyChainGroupTest {
     public void bloom() {
         ECKey key1 = group.freshKey(KeyChain.KeyPurpose.RECEIVE_FUNDS);
         ECKey key2 = new ECKey();
-        BloomFilter filter = group.getBloomFilter(group.getBloomFilterElementCount(), LOW_FALSE_POSITIVE_RATE, new Random().nextInt());
+        BloomFilter filter = group.getBloomFilter(group.getBloomFilterElementCount(), LOW_FALSE_POSITIVE_RATE, new SecureRandom().nextInt());
         assertTrue(filter.contains(key1.getPubKeyHash()));
         assertTrue(filter.contains(key1.getPubKey()));
         assertFalse(filter.contains(key2.getPubKey()));
@@ -281,7 +282,7 @@ public class KeyChainGroupTest {
         // We ran ahead of the lookahead buffer.
         assertFalse(filter.contains(group.freshKey(KeyChain.KeyPurpose.RECEIVE_FUNDS).getPubKey()));
         group.importKeys(key2);
-        filter = group.getBloomFilter(group.getBloomFilterElementCount(), LOW_FALSE_POSITIVE_RATE, new Random().nextInt());
+        filter = group.getBloomFilter(group.getBloomFilterElementCount(), LOW_FALSE_POSITIVE_RATE, new SecureRandom().nextInt());
         assertTrue(filter.contains(key1.getPubKeyHash()));
         assertTrue(filter.contains(key1.getPubKey()));
         assertTrue(filter.contains(key2.getPubKey()));

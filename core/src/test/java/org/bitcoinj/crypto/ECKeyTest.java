@@ -18,6 +18,7 @@
 package org.bitcoinj.crypto;
 
 import com.google.common.collect.Lists;
+import java.security.SecureRandom;
 import org.bitcoinj.base.Address;
 import org.bitcoinj.base.LegacyAddress;
 import org.bitcoinj.base.ScriptType;
@@ -562,7 +563,7 @@ public class ECKeyTest {
         }
 
         byte[] hash = new byte[32];
-        new Random().nextBytes(hash);
+        new SecureRandom().nextBytes(hash);
         byte[] sigBytes = key.sign(Sha256Hash.wrap(hash)).encodeToDER();
         byte[] encodedSig = Arrays.copyOf(sigBytes, sigBytes.length + 1);
         encodedSig[sigBytes.length] = Transaction.SigHash.ALL.byteValue();

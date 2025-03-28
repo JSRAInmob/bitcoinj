@@ -16,6 +16,7 @@
 
 package org.bitcoinj.base.internal;
 
+import java.security.SecureRandom;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
@@ -149,7 +150,7 @@ public class ByteUtilsTest {
     public void bigIntegerToBytes_roundTrip() {
         int ITERATIONS = 100;
         int LENGTH = 32;
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         byte[] bytes = new byte[LENGTH];
 
         for (int i = 0; i < ITERATIONS; i++) {

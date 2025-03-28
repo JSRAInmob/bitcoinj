@@ -22,6 +22,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.math.IntMath;
 import com.google.protobuf.ByteString;
 import java.nio.file.Files;
+import java.security.SecureRandom;
 import net.jcip.annotations.GuardedBy;
 import org.bitcoinj.base.BitcoinNetwork;
 import org.bitcoinj.base.Network;
@@ -5067,7 +5068,7 @@ public class Wallet extends BaseTaggableObject
     public BloomFilter getBloomFilter(double falsePositiveRate) {
         beginBloomFilterCalculation();
         try {
-            return getBloomFilter(getBloomFilterElementCount(), falsePositiveRate, new Random().nextInt());
+            return getBloomFilter(getBloomFilterElementCount(), falsePositiveRate, new SecureRandom().nextInt());
         } finally {
             endBloomFilterCalculation();
         }
