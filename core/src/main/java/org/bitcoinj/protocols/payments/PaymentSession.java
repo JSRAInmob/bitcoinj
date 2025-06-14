@@ -18,6 +18,8 @@ package org.bitcoinj.protocols.payments;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.protobuf.InvalidProtocolBufferException;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.bitcoinj.protobuf.payments.Protos;
 import org.bitcoinj.base.Address;
 import org.bitcoinj.base.Coin;
@@ -334,7 +336,7 @@ public class PaymentSession {
             return FutureUtils.failedFuture(new PaymentProtocolException.Expired("PaymentRequest is expired"));
         URL url;
         try {
-            url = new URL(paymentDetails.getPaymentUrl());
+            url = Urls.create(paymentDetails.getPaymentUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException e) {
             return FutureUtils.failedFuture(new PaymentProtocolException.InvalidPaymentURL(e));
         }

@@ -16,6 +16,8 @@
 
 package org.bitcoinj.walletfx.utils;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -180,7 +182,7 @@ public class GuiUtils {
      */
     public static URL getResource(Class<?> clazz, String name) {
         if (false)
-            return unchecked(() -> new URL("file:///your/path/here/src/main/wallettemplate/" + name));
+            return unchecked(() -> Urls.create("file:///your/path/here/src/main/wallettemplate/" + name, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
         else
             return clazz.getResource(name);
     }
